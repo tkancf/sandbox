@@ -1,2 +1,5 @@
-<h1>SvelteKit sandbox</h1>
+<svelte:head>
+	<title>SvelteKit sandbox</title>
+</svelte:head>
+
 <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
