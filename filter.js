@@ -1,4 +1,4 @@
-ObjC.import('Foundation');
+ObjC.import('Foundation'); 
 ObjC.import('stdlib');
 var window = {} // required for chrono.js to function properly, see https://github.com/wanasit/chrono/issues/34
 

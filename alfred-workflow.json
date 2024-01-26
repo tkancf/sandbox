@@ -1,0 +1,140 @@
+{
+    "alfredworkflow" : {
+      "arg" : "{query}",
+      "config" : {
+      },
+      "variables" : {
+        "hello": 1,
+        "supportedApplications" : [
+          [
+            {
+              "reminderText" : "Application('Contacts').selection()[0].name()",
+              "icon" : "Address Book.png",
+              "appname" : "Address Book",
+              "reminderBody" : "'addressbook:\/\/' + Application('Contacts').selection()[0].id()"
+            },
+            {
+              "reminderText" : "Application('Microsoft Edge').windows[0].activeTab.title();",
+              "icon" : "Edge",
+              "appname" : "Microsoft Edge",
+              "reminderBody" : "Application('Microsoft Edge').windows[0].activeTab.url();"
+            },
+            {
+              "reminderText" : "Application('Brave Browser').windows[0].activeTab.title();",
+              "icon" : "Brave.png",
+              "appname" : "Brave Browser",
+              "reminderBody" : "Application('Brave Browser').windows[0].activeTab.url();"
+            },
+            {
+              "reminderText" : "Application('Microsoft Excel').activeDocument.name()",
+              "icon" : "Excel.png",
+              "appname" : "Microsoft Excel",
+              "reminderBody" : "var p = Application('Microsoft Excel').activeDocument.posixFullName(); if(p) 'file:\/\/' + escape(p)"
+            },
+            {
+              "reminderText" : "Application('Adobe Acrobat').activeDoc.name()",
+              "icon" : "AcrobatPro.png",
+              "appname" : "AdobeAcrobat",
+              "reminderBody" : "var p = Application('Adobe Acrobat').activeDoc.fileAlias().toString(); if(p) 'file:\/\/' + escape(p)"
+            },
+            {
+              "reminderText" : "Application('Chromium').windows[0].activeTab.title();",
+              "icon" : "Chromium.png",
+              "appname" : "Chromium",
+              "reminderBody" : "Application('Chromium').windows[0].activeTab.url();"
+            },
+            {
+              "reminderText" : "Application('Contacts').selection()[0].name()",
+              "icon" : "Address Book.png",
+              "appname" : "Contacts",
+              "reminderBody" : "'addressbook:\/\/' + Application('Contacts').selection()[0].id()"
+            },
+            {
+              "reminderText" : "Application('Finder').selection()[0].name()",
+              "icon" : "Finder.png",
+              "appname" : "Finder",
+              "reminderBody" : "Application('Finder').selection()[0].url()"
+            },
+            {
+              "reminderText" : "Application('Firefox').windows[0].activeTab.title();",
+              "icon" : "Firefox.png",
+              "appname" : "Firefox",
+              "reminderBody" : "Application('Firefox').windows[0].activeTab.url();"
+            },
+            {
+              "reminderText" : "Application('FoldingText').documents[0].name()",
+              "icon" : "App.png",
+              "appname" : "FoldingText",
+              "reminderBody" : "var p = Application('FoldingText').documents[0].path(); if(p) 'file:\/\/' + escape(p)"
+            },
+            {
+              "reminderText" : "Application('Google Chrome').windows[0].activeTab.title();",
+              "icon" : "Chrome.png",
+              "appname" : "Google Chrome",
+              "reminderBody" : "Application('Google Chrome').windows[0].activeTab.url();"
+            },
+            {
+              "reminderText" : "Application('Google Chrome Canary').windows[0].activeTab.title();",
+              "icon" : "Chrome Canary.png",
+              "appname" : "Google Chrome Canary",
+              "reminderBody" : "Application('Google Chrome Canary').windows[0].activeTab.url();"
+            },
+            {
+              "reminderText" : "Application('Mailplane 3').currenttitle()",
+              "icon" : "Mailplane 3.png",
+              "appname" : "Mailplane 3",
+              "reminderBody" : "Application('MailPlane 3').currentmessagetext()"
+            },
+            {
+              "reminderText" : "var m = Application('Mail').selection()[Application('Mail').selection().length-1]; m.subject() + ' (From ' + m.sender() + ')'",
+              "icon" : "Mail.png",
+              "appname" : "Mail",
+              "reminderBody" : "var m = Application('Mail').selection()[Application('Mail').selection().length-1]; 'message:\/\/<' + m.messageId() + '>'"
+            },
+            {
+              "reminderText" : "Application('Microsoft PowerPoint').activePresentation.name()",
+              "icon" : "Powerpoint.png",
+              "appname" : "Microsoft PowerPoint",
+              "reminderBody" : "var p = Application('Microsoft PowerPoint').activePresentation.fullName(); if(p) 'file:\/\/' + escape(p)"
+            },
+            {
+              "reminderText" : "Application('Microsoft Word').activeDocument.name()",
+              "icon" : "MSWord.png",
+              "appname" : "Microsoft Word",
+              "reminderBody" : "var p = Application('Microsoft Word').activeDocument.posixFullName(); if(p) 'file:\/\/' + escape(p)"
+            },
+            {
+              "reminderText" : "Application('Safari').windows[0].currentTab.name();",
+              "icon" : "Safari.png",
+              "appname" : "Safari",
+              "reminderBody" : "Application('Safari').windows[0].currentTab.url();"
+            },
+            {
+              "reminderText" : "Application('TextEdit').documents[0].name()",
+              "icon" : "TextEdit.png",
+              "appname" : "TextEdit",
+              "reminderBody" : "var p = Application('TextEdit').documents[0].path(); if(p) 'file:\/\/' + escape(p)"
+            },
+            {
+              "reminderText" : "Application('TextMate').documents[0].name()",
+              "icon" : "TextMate.png",
+              "appname" : "TextMate",
+              "reminderBody" : "var p = Application('TextMate').documents[0].path(); if(p) 'file:\/\/' + escape(p)"
+            },
+            {
+              "reminderText" : "Application('Vienna').currentArticle().title()",
+              "icon" : "RSS.png",
+              "appname" : "Vienna",
+              "reminderBody" : "Application('Vienna').currentArticle().link()"
+            },
+            {
+              "reminderText" : "Application('WebKit').windows[0].currentTab.name();",
+              "icon" : "Safari.png",
+              "appname" : "WebKit",
+              "reminderBody" : "Application('WebKit').windows[0].currentTab.url();"
+            }
+          ]
+        ]
+      }
+    }
+  }
