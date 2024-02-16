@@ -1,0 +1,1 @@
+ref: https://github.com/yusukebe/hono-ssg-example
