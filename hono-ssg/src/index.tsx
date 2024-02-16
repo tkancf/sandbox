@@ -1,11 +1,11 @@
-import { Hono } from 'hono'
-import { ssgParams } from 'hono/ssg'
-import { jsxRenderer } from 'hono/jsx-renderer'
+import { Hono } from "hono";
+import { onlySSG, ssgParams } from "hono/ssg";
+import { jsxRenderer } from "hono/jsx-renderer";
 
-const app = new Hono()
+const app = new Hono();
 
 app.all(
-  '*',
+  "*",
   jsxRenderer(({ children }) => {
     return (
       <html>
@@ -19,25 +19,25 @@ app.all(
           <main>{children}</main>
         </body>
       </html>
-    )
+    );
   })
-)
+);
 
-app.get('/', (c) => {
-  return c.render(<h1>Hello Hono🔥</h1>)
-})
+app.get("/", (c) => {
+  return c.render(<h1>Hello Hono🔥</h1>);
+});
 
-app.get('/foo', (c) => {
-  return c.render(<h1>Foo</h1>)
-})
+app.get("/foo", (c) => {
+  return c.render(<h1>Foo</h1>);
+});
 
 type Post = {
-  id: string
-}
+  id: string;
+};
 
-const posts: Post[] = [{ id: 'hello' }, { id: 'morning' }, { id: 'night' }]
+const posts: Post[] = [{ id: "hello" }, { id: "morning" }, { id: "night" }];
 
-app.get('/posts', (c) => {
+app.get("/posts", (c) => {
   return c.render(
     <ul>
       {posts.map((post) => {
@@ -45,22 +45,22 @@ app.get('/posts', (c) => {
           <li>
             <a href={`/posts/${post.id}`}>{post.id}</a>
           </li>
-        )
+        );
       })}
     </ul>
-  )
-})
+  );
+});
 
 app.get(
-  '/posts/:id',
+  "/posts/:id",
   ssgParams(() => posts),
   (c) => {
-    return c.render(<h1>{c.req.param('id')}</h1>)
+    return c.render(<h1>{c.req.param("id")}</h1>);
   }
-)
+);
 
-app.get('/status', ssgParams(false), (c) => c.json({ ok: true }))
+app.get("/status", onlySSG(), (c) => c.json({ ok: true }));
 
-app.get('/404', (c) => c.notFound())
+app.get("/404", (c) => c.notFound());
 
-export default app
+export default app;
