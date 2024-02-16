@@ -1,8 +1,8 @@
 node_modules
 dist
-dist/*
 .wrangler
 .dev.vars
+.hono
 
 # Change them to your taste:
 wrangler.toml
