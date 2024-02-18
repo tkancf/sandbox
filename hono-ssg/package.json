@@ -12,6 +12,7 @@
     "wrangler": "^3.22.3"
   },
   "dependencies": {
+    "@hono/vite-ssg": "^0.1.0",
     "hono": "^4.0.3"
   }
 }
