@@ -4,6 +4,7 @@ import { jsxRenderer } from "hono/jsx-renderer";
 import { FC } from "hono/jsx";
 
 const app = new Hono();
+const title = "tkancf.com";
 
 const Layout: FC = (props) => {
   return (
@@ -11,6 +12,7 @@ const Layout: FC = (props) => {
       <link href="/static/style.css" rel="stylesheet" />
       <body>
         <header>
+          <h1>{title}</h1>
           <a href="/">Home</a>
           <a href="/blog">Blog</a>
           <a href="/about">About</a>
