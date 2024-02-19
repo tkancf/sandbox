@@ -2,14 +2,18 @@ import { Hono } from "hono";
 import { onlySSG, ssgParams } from "hono/ssg";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { FC } from "hono/jsx";
+import { globalStyle } from "./style";
+import { Style } from "hono/css";
 
 const app = new Hono();
 const title = "tkancf.com";
 
 const Layout: FC = (props) => {
   return (
-    <html>
-      <link href="/static/style.css" rel="stylesheet" />
+    <html class={globalStyle}>
+      <head>
+        <Style />
+      </head>
       <body>
         <header>
           <h1>{title}</h1>
