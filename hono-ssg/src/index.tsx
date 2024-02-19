@@ -1,25 +1,36 @@
 import { Hono } from "hono";
 import { onlySSG, ssgParams } from "hono/ssg";
 import { jsxRenderer } from "hono/jsx-renderer";
+import { FC } from "hono/jsx";
 
 const app = new Hono();
+
+const Layout: FC = (props) => {
+  return (
+    <html>
+      <link href="/static/style.css" rel="stylesheet" />
+      <body>
+        <Header></Header>
+        <main>{props.children}</main>
+      </body>
+    </html>
+  );
+};
+
+const Header: FC = (props) => {
+  return (
+    <header>
+      <a href="/">top</a> &nbsp;
+      <a href="/foo">foo</a> &nbsp;
+      <a href="/posts">posts</a>
+    </header>
+  );
+};
 
 app.all(
   "*",
   jsxRenderer(({ children }) => {
-    return (
-      <html>
-        <link href="/static/style.css" rel="stylesheet" />
-        <body>
-          <header>
-            <a href="/">top</a> &nbsp;
-            <a href="/foo">foo</a> &nbsp;
-            <a href="/posts">posts</a>
-          </header>
-          <main>{children}</main>
-        </body>
-      </html>
-    );
+    return <Layout>{children}</Layout>;
   })
 );
 
