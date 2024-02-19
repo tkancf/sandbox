@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { onlySSG, ssgParams } from "hono/ssg";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { FC } from "hono/jsx";
-import { globalCss } from "./style";
+import { globalClass } from "./style";
 import { css, Style } from "hono/css";
 
 const app = new Hono();
@@ -19,9 +19,9 @@ const linkClass = css`
 
 const Layout: FC = (props) => {
   return (
-    <html class={globalCss}>
+    <html>
       <head>
-        <Style />
+        <Style>{globalClass}</Style>
       </head>
       <body>
         <header>
@@ -52,7 +52,15 @@ app.all(
 );
 
 app.get("/", (c) => {
-  return c.render(<h1>Home🔥</h1>);
+  return c.render(
+    <>
+      <h1>Home🔥</h1>
+      <p>
+        Welcome to my blog! This is a sample blog built with Hono. You can find
+        the source code for this blog{" "}
+      </p>
+    </>
+  );
 });
 
 app.get("/blog", (c) => {
