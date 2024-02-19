@@ -10,20 +10,14 @@ const Layout: FC = (props) => {
     <html>
       <link href="/static/style.css" rel="stylesheet" />
       <body>
-        <Header></Header>
+        <header>
+          <a href="/">Home</a>
+          <a href="/blog">Blog</a>
+          <a href="/about">About</a>
+        </header>
         <main>{props.children}</main>
       </body>
     </html>
-  );
-};
-
-const Header: FC = () => {
-  return (
-    <header>
-      <a href="/">Home</a>
-      <a href="/blog">Blog</a>
-      <a href="/about">About</a>
-    </header>
   );
 };
 
