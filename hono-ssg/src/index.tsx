@@ -3,10 +3,19 @@ import { onlySSG, ssgParams } from "hono/ssg";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { FC } from "hono/jsx";
 import { globalCss } from "./style";
-import { Style } from "hono/css";
+import { css, Style } from "hono/css";
 
 const app = new Hono();
 const title = "tkancf.com";
+
+const linkClass = css`
+  margin-right: 10px; /* Adjust the spacing as needed */
+  text-decoration: none; /* Optional: removes underline from links */
+  color: inherit; /* Optional: ensures link color matches your design */
+  &:last-child {
+    margin-right: 0;
+  }
+`;
 
 const Layout: FC = (props) => {
   return (
@@ -17,9 +26,17 @@ const Layout: FC = (props) => {
       <body>
         <header>
           <h1>{title}</h1>
-          <a href="/">Home</a>
-          <a href="/blog">Blog</a>
-          <a href="/about">About</a>
+          <nav>
+            <a class={linkClass} href="/">
+              Home
+            </a>
+            <a class={linkClass} href="/blog">
+              Blog
+            </a>
+            <a class={linkClass} href="/about">
+              About
+            </a>
+          </nav>
         </header>
         <main>{props.children}</main>
       </body>
