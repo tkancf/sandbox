@@ -35,11 +35,15 @@ app.all(
 );
 
 app.get("/", (c) => {
-  return c.render(<h1>Hello Hono🔥</h1>);
+  return c.render(<h1>Home🔥</h1>);
 });
 
-app.get("/foo", (c) => {
-  return c.render(<h1>Foo</h1>);
+app.get("/blog", (c) => {
+  return c.render(<h1>Blog</h1>);
+});
+
+app.get("/about", (c) => {
+  return c.render(<h1>About</h1>);
 });
 
 type Post = {
