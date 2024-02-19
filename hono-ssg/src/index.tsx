@@ -20,9 +20,9 @@ const Layout: FC = (props) => {
 const Header: FC = (props) => {
   return (
     <header>
-      <a href="/">top</a> &nbsp;
-      <a href="/foo">foo</a> &nbsp;
-      <a href="/posts">posts</a>
+      <a href="/">Home</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
     </header>
   );
 };
