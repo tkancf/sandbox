@@ -74,6 +74,7 @@ app.get(
   }
 );
 
+// SSGでビルドしたときだけアクセスできるエンドポイント
 app.get("/status", onlySSG(), (c) => c.json({ ok: true }));
 
 app.get("/404", (c) => c.notFound());
