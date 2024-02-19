@@ -17,6 +17,10 @@ const linkClass = css`
   }
 `;
 
+const headerClass = css`
+  margin: 0 0 2em;
+`;
+
 const Layout: FC = (props) => {
   return (
     <html>
@@ -24,7 +28,7 @@ const Layout: FC = (props) => {
         <Style>{globalClass}</Style>
       </head>
       <body>
-        <header>
+        <header class={headerClass}>
           <h1>{title}</h1>
           <nav>
             <a class={linkClass} href="/">
@@ -39,6 +43,9 @@ const Layout: FC = (props) => {
           </nav>
         </header>
         <main>{props.children}</main>
+        <footer>
+          <p>© 2021 tkancf.com</p>
+        </footer>
       </body>
     </html>
   );
