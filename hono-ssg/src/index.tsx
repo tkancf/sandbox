@@ -17,7 +17,7 @@ const Layout: FC = (props) => {
   );
 };
 
-const Header: FC = (props) => {
+const Header: FC = () => {
   return (
     <header>
       <a href="/">Home</a>
