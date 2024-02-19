@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { onlySSG, ssgParams } from "hono/ssg";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { FC } from "hono/jsx";
-import { globalStyle } from "./style";
+import { globalCss } from "./style";
 import { Style } from "hono/css";
 
 const app = new Hono();
@@ -10,7 +10,7 @@ const title = "tkancf.com";
 
 const Layout: FC = (props) => {
   return (
-    <html class={globalStyle}>
+    <html class={globalCss}>
       <head>
         <Style />
       </head>
