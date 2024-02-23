@@ -32,7 +32,7 @@ const Layout: FC = (props) => {
         </header>
         <main>{props.children}</main>
         <footer>
-          <p>© 2021 tkancf.com</p>
+          <p>© 2024 tkancf.com</p>
         </footer>
       </body>
     </html>
