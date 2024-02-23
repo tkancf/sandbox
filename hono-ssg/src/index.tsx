@@ -8,19 +8,6 @@ import { css, Style } from "hono/css";
 const app = new Hono();
 const title = "tkancf.com";
 
-const linkClass = css`
-  margin-right: 10px; /* Adjust the spacing as needed */
-  text-decoration: none; /* Optional: removes underline from links */
-  color: inherit; /* Optional: ensures link color matches your design */
-  &:last-child {
-    margin-right: 0;
-  }
-`;
-
-const headerClass = css`
-  margin: 0 0 2em;
-`;
-
 const Layout: FC = (props) => {
   return (
     <html>
@@ -29,16 +16,16 @@ const Layout: FC = (props) => {
         <Style>{globalClass}</Style>
       </head>
       <body>
-        <header class={headerClass}>
+        <header>
           <h1>{title}</h1>
           <nav>
-            <a class={linkClass} href="/">
+            <a href="/">
               Home
             </a>
-            <a class={linkClass} href="/blog">
+            <a href="/blog">
               Blog
             </a>
-            <a class={linkClass} href="/about">
+            <a href="/about">
               About
             </a>
           </nav>
