@@ -58,8 +58,8 @@ app.get("/", (c) => {
   );
 });
 
-app.get("/blog", (c) => {
-  return c.render(<h1>Blog</h1>);
+app.get("/blog", async (c) => {
+  return c.render(<div dangerouslySetInnerHTML={{ __html: body }}></div>);
 });
 
 app.get("/about", (c) => {

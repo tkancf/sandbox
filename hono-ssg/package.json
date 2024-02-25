@@ -7,10 +7,18 @@
     "deploy": "$npm_execpath run build && wrangler pages deploy ./dist --commit-dirty=true"
   },
   "devDependencies": {
-    "@hono/vite-ssg": "^0.1.0",
     "@hono/vite-dev-server": "^0.3.4",
+    "@hono/vite-ssg": "^0.1.0",
+    "rehype-stringify": "^10.0.0",
+    "remark": "^15.0.1",
+    "remark-extract-frontmatter": "^3.2.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.0",
     "vite": "^5.0.11",
-    "wrangler": "^3.22.3"
+    "wrangler": "^3.22.3",
+    "yaml": "^2.3.4"
   },
   "dependencies": {
     "hono": "^4.0.3"
