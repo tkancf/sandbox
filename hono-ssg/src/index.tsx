@@ -4,6 +4,7 @@ import { jsxRenderer } from "hono/jsx-renderer";
 import { FC } from "hono/jsx";
 import { globalClass } from "./style";
 import { css, Style } from "hono/css";
+import { body } from "./markdown";
 
 const app = new Hono();
 const title = "tkancf.com";
@@ -19,15 +20,9 @@ const Layout: FC = (props) => {
         <header>
           <h1>{title}</h1>
           <nav>
-            <a href="/">
-              Home
-            </a>
-            <a href="/blog">
-              Blog
-            </a>
-            <a href="/about">
-              About
-            </a>
+            <a href="/">Home</a>
+            <a href="/blog">Blog</a>
+            <a href="/about">About</a>
           </nav>
         </header>
         <main>{props.children}</main>
