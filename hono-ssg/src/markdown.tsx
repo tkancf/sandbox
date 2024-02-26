@@ -35,7 +35,7 @@ const result = await remark()
 export const post: Post = {
   slug: path.parse(path.basename(filePath)).name,
   title: (result.data.frontMatter as any).title,
-  pubDate: (result.data.frontMatter as any).pubDate as string,
-  description: (result.data.frontMatter as any).description as string,
+  pubDate: (result.data.frontMatter as any).pubDate,
+  description: (result.data.frontMatter as any).description,
   body: result.toString(),
 };
