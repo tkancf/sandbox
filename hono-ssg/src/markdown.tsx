@@ -7,6 +7,7 @@ import fs from "fs";
 import path from "path";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkExtractFrontmatter from "remark-extract-frontmatter";
+import remarkExpressiveCode from "remark-expressive-code";
 import yaml from "yaml";
 
 type Post = {
@@ -25,6 +26,9 @@ const result = await remark()
   .use(remarkExtractFrontmatter, {
     yaml: yaml.parse,
     name: "frontMatter", // result.data 配下のキー名を決める
+  })
+  .use(remarkExpressiveCode, {
+    theme: "github-light",
   })
   .use(remarkGfm)
   .use(remarkRehype, { allowDangerousHtml: true })

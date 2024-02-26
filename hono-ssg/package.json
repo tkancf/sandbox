@@ -11,6 +11,7 @@
     "@hono/vite-ssg": "^0.1.0",
     "rehype-stringify": "^10.0.0",
     "remark": "^15.0.1",
+    "remark-expressive-code": "^0.33.4",
     "remark-extract-frontmatter": "^3.2.0",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.0",
