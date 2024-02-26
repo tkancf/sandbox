@@ -146,11 +146,11 @@ jpeg 画像が重く PageSpeed Insights のパフォーマンスが 93 点にな
 https://github.com/tkancf/tkancf.com/commit/591fdc4d0df85b532434ce396ec123a726ee46dc
 
 変換前の PageSpeed Insights の点数
-![PageSpeed Insightsで93点の画像](/astro-and-cloudflare-pages-blog-creation/PageSpeed-Insights-93.webp)
+![PageSpeed Insightsで93点の画像](https://tkancf.com/astro-and-cloudflare-pages-blog-creation/PageSpeed-Insights-93.webp)
 
 変換後の PageSpeed Insights の点数
 
-![PageSpeed Insightsで93点の画像](/astro-and-cloudflare-pages-blog-creation/PageSpeed-Insights-100.webp)
+![PageSpeed Insightsで93点の画像](https://tkancf.com/astro-and-cloudflare-pages-blog-creation/PageSpeed-Insights-100.webp)
 
 変換後は無事 100 点になりました。
 

@@ -4,9 +4,18 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import fs from "fs";
+import path from "path";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkExtractFrontmatter from "remark-extract-frontmatter";
 import yaml from "yaml";
+
+type Post = {
+  slug: string;
+  title: string;
+  pubDate: string;
+  description: string;
+  body: string;
+};
 
 const filePath = "./src/example.md";
 const content = fs.readFileSync(filePath, { encoding: "utf-8" });
@@ -23,6 +32,10 @@ const result = await remark()
   .use(remarkGfm)
   .process(content);
 
-const frontmatter = result;
-console.log(frontmatter);
-export const body = result.toString();
+export const post: Post = {
+  slug: path.parse(path.basename(filePath)).name,
+  title: (result.data.frontMatter as any).title,
+  pubDate: (result.data.frontMatter as any).pubDate as string,
+  description: (result.data.frontMatter as any).description as string,
+  body: result.toString(),
+};

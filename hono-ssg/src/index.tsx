@@ -4,7 +4,7 @@ import { jsxRenderer } from "hono/jsx-renderer";
 import { FC } from "hono/jsx";
 import { globalClass } from "./style";
 import { css, Style } from "hono/css";
-import { body } from "./markdown";
+import { post } from "./markdown";
 
 const app = new Hono();
 const title = "tkancf.com";
@@ -54,7 +54,15 @@ app.get("/", (c) => {
 });
 
 app.get("/blog", async (c) => {
-  return c.render(<div dangerouslySetInnerHTML={{ __html: body }}></div>);
+  return c.render(
+    <>
+      <h1>{post.title}</h1>
+      <div>投稿日: {post.pubDate}</div>
+      <div>{post.description}</div>
+      <hr></hr>
+      <div dangerouslySetInnerHTML={{ __html: post.body }}></div>
+    </>
+  );
 });
 
 app.get("/about", (c) => {
