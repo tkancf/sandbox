@@ -3,8 +3,8 @@ import { onlySSG, ssgParams } from "hono/ssg";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { FC } from "hono/jsx";
 import { globalClass } from "./style";
-import { css, Style } from "hono/css";
-import { post } from "./markdown";
+import { Style } from "hono/css";
+import { post } from "./post";
 
 const app = new Hono();
 const title = "tkancf.com";
