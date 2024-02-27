@@ -53,4 +53,9 @@ const posts: Post[] = await Promise.all(
   })
 );
 
+// posts sort by pubDate
+posts.sort((a, b) => {
+  return new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime();
+});
+
 export { posts };
