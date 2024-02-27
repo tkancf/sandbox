@@ -21,40 +21,44 @@ type Post = {
 const postsDir = "content/blog";
 const postFiles = fs.readdirSync(postsDir);
 
-const posts: Post[] = await Promise.all(
-  postFiles.map(async (file) => {
-    const filePath = path.join(postsDir, file);
-    const content = fs.readFileSync(filePath, { encoding: "utf-8" });
-    const result = await remark()
-      .use(remarkParse)
-      .use(remarkFrontmatter, [{ type: "yaml", marker: "-", anywhere: false }])
-      .use(remarkExtractFrontmatter, {
-        yaml: yaml.parse,
-        name: "frontMatter", // result.data 配下のキー名を決める
-      })
-      .use(remarkExpressiveCode, {
-        theme: "github-light",
-      })
-      .use(remarkGfm)
-      .use(remarkRehype, { allowDangerousHtml: true })
-      .use(rehypeStringify, { allowDangerousHtml: true })
-      .use(remarkGfm)
-      .process(content);
+export const getPosts = async () => {
+  const posts: Post[] = await Promise.all(
+    postFiles.map(async (file) => {
+      const filePath = path.join(postsDir, file);
+      const content = fs.readFileSync(filePath, { encoding: "utf-8" });
+      const result = await remark()
+        .use(remarkParse)
+        .use(remarkFrontmatter, [
+          { type: "yaml", marker: "-", anywhere: false },
+        ])
+        .use(remarkExtractFrontmatter, {
+          yaml: yaml.parse,
+          name: "frontMatter", // result.data 配下のキー名を決める
+        })
+        .use(remarkExpressiveCode, {
+          theme: "github-light",
+        })
+        .use(remarkGfm)
+        .use(remarkRehype, { allowDangerousHtml: true })
+        .use(rehypeStringify, { allowDangerousHtml: true })
+        .use(remarkGfm)
+        .process(content);
 
-    const post: Post = {
-      slug: path.parse(path.basename(filePath)).name,
-      title: (result.data.frontMatter as any).title,
-      pubDate: (result.data.frontMatter as any).pubDate,
-      description: (result.data.frontMatter as any).description,
-      body: result.toString(),
-    };
-    return post;
-  })
-);
+      const post: Post = {
+        slug: path.parse(path.basename(filePath)).name,
+        title: (result.data.frontMatter as any).title,
+        pubDate: (result.data.frontMatter as any).pubDate,
+        description: (result.data.frontMatter as any).description,
+        body: result.toString(),
+      };
+      return post;
+    })
+  );
 
-// posts sort by pubDate
-posts.sort((a, b) => {
-  return new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime();
-});
+  // posts sort by pubDate
+  posts.sort((a, b) => {
+    return new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime();
+  });
 
-export { posts };
+  return posts;
+};

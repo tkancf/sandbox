@@ -4,11 +4,12 @@ import { jsxRenderer } from "hono/jsx-renderer";
 import { FC } from "hono/jsx";
 import { globalClass } from "./style";
 import { Style } from "hono/css";
-import { posts } from "./post";
+import { getPosts } from "./post";
 import { serveStatic } from "@hono/node-server/serve-static";
 
 const app = new Hono();
 const title = "tkancf.com";
+const posts = await getPosts();
 
 const Layout: FC = (props) => {
   return (
@@ -73,39 +74,37 @@ app.get("/blog", async (c) => {
   );
 });
 
-app.get("/blog/:slug", (c) => {
-  const slug = c.req.param("slug");
-  const post = posts.find((p) => p.slug === slug);
-  if (!post) {
-    return c.redirect("/404");
+app.get(
+  "/blog/:slug",
+  ssgParams(async () => {
+    return posts.map((post) => {
+      return {
+        slug: post.slug,
+      };
+    });
+  }),
+  async (c) => {
+    const slug = c.req.param("slug");
+    const post = posts.find((p) => p.slug === slug);
+    if (!post) {
+      return c.redirect("/404");
+    }
+    return c.render(
+      <>
+        <h1>{post.title}</h1>
+        <div>slug: {slug}</div>
+        <div>投稿日: {post.pubDate}</div>
+        <div>{post.description}</div>
+        <hr></hr>
+        <div dangerouslySetInnerHTML={{ __html: post.body }}></div>
+      </>
+    );
   }
-  return c.render(
-    <>
-      <h1>{post.title}</h1>
-      <div>slug: {slug}</div>
-      <div>投稿日: {post.pubDate}</div>
-      <div>{post.description}</div>
-      <hr></hr>
-      <div dangerouslySetInnerHTML={{ __html: post.body }}></div>
-    </>
-  );
-});
+);
 
 app.get("/about", (c) => {
   return c.render(<h1>About</h1>);
 });
-
-type Post = {
-  id: string;
-};
-
-app.get(
-  "/posts/:id",
-  ssgParams(() => posts),
-  (c) => {
-    return c.render(<h1>{c.req.param("id")}</h1>);
-  }
-);
 
 // SSGでビルドしたときだけアクセスできるエンドポイント
 app.get("/status", onlySSG(), (c) => c.json({ ok: true }));
