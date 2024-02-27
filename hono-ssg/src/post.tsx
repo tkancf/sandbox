@@ -18,30 +18,38 @@ type Post = {
   body: string;
 };
 
-const filePath = "./src/example.md";
-const content = fs.readFileSync(filePath, { encoding: "utf-8" });
-const result = await remark()
-  .use(remarkParse)
-  .use(remarkFrontmatter, [{ type: "yaml", marker: "-", anywhere: false }])
-  .use(remarkExtractFrontmatter, {
-    yaml: yaml.parse,
-    name: "frontMatter", // result.data 配下のキー名を決める
-  })
-  .use(remarkExpressiveCode, {
-    theme: "github-light",
-  })
-  .use(remarkGfm)
-  .use(remarkRehype, { allowDangerousHtml: true })
-  .use(rehypeStringify, { allowDangerousHtml: true })
-  .use(remarkGfm)
-  .process(content);
+const postsDir = "content/blog";
+const postFiles = fs.readdirSync(postsDir);
 
-export const post: Post = {
-  slug: path.parse(path.basename(filePath)).name,
-  title: (result.data.frontMatter as any).title,
-  pubDate: (result.data.frontMatter as any).pubDate,
-  description: (result.data.frontMatter as any).description,
-  body: result.toString(),
-};
+const posts: Post[] = await Promise.all(
+  postFiles.map(async (file) => {
+    const filePath = path.join(postsDir, file);
+    const content = fs.readFileSync(filePath, { encoding: "utf-8" });
+    const result = await remark()
+      .use(remarkParse)
+      .use(remarkFrontmatter, [{ type: "yaml", marker: "-", anywhere: false }])
+      .use(remarkExtractFrontmatter, {
+        yaml: yaml.parse,
+        name: "frontMatter", // result.data 配下のキー名を決める
+      })
+      .use(remarkExpressiveCode, {
+        theme: "github-light",
+      })
+      .use(remarkGfm)
+      .use(remarkRehype, { allowDangerousHtml: true })
+      .use(rehypeStringify, { allowDangerousHtml: true })
+      .use(remarkGfm)
+      .process(content);
 
-export const posts: Post[] = [post];
+    const post: Post = {
+      slug: path.parse(path.basename(filePath)).name,
+      title: (result.data.frontMatter as any).title,
+      pubDate: (result.data.frontMatter as any).pubDate,
+      description: (result.data.frontMatter as any).description,
+      body: result.toString(),
+    };
+    return post;
+  })
+);
+
+export { posts };
