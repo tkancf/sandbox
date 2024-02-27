@@ -41,6 +41,7 @@ const posts: Post[] = await Promise.all(
       .use(remarkGfm)
       .process(content);
 
+    console.log(result.data.frontMatter);
     const post: Post = {
       slug: path.parse(path.basename(filePath)).name,
       title: (result.data.frontMatter as any).title,
