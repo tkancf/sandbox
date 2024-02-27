@@ -43,3 +43,5 @@ export const post: Post = {
   description: (result.data.frontMatter as any).description,
   body: result.toString(),
 };
+
+export const posts: Post[] = [post];

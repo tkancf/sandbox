@@ -4,7 +4,7 @@ import { jsxRenderer } from "hono/jsx-renderer";
 import { FC } from "hono/jsx";
 import { globalClass } from "./style";
 import { Style } from "hono/css";
-import { post } from "./post";
+import { posts } from "./post";
 
 const app = new Hono();
 const title = "tkancf.com";
@@ -54,9 +54,32 @@ app.get("/", (c) => {
 });
 
 app.get("/blog", async (c) => {
+  // return all posts
+  return c.render(
+    <>
+      <h1>Blog</h1>
+      <ul>
+        {posts.map((post) => (
+          <li>
+            <time>{post.pubDate}</time>
+            <a href={`/blog/${post.slug}`}>{post.title}</a>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+});
+
+app.get("/blog/:slug", (c) => {
+  const slug = c.req.param("slug");
+  const post = posts.find((p) => p.slug === slug);
+  if (!post) {
+    return c.redirect("/404");
+  }
   return c.render(
     <>
       <h1>{post.title}</h1>
+      <div>slug: {slug}</div>
       <div>投稿日: {post.pubDate}</div>
       <div>{post.description}</div>
       <hr></hr>
@@ -72,22 +95,6 @@ app.get("/about", (c) => {
 type Post = {
   id: string;
 };
-
-const posts: Post[] = [{ id: "hello" }, { id: "morning" }, { id: "night" }];
-
-app.get("/posts", (c) => {
-  return c.render(
-    <ul>
-      {posts.map((post) => {
-        return (
-          <li>
-            <a href={`/posts/${post.id}`}>{post.id}</a>
-          </li>
-        );
-      })}
-    </ul>
-  );
-});
 
 app.get(
   "/posts/:id",
