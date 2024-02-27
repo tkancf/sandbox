@@ -5,6 +5,7 @@ import { FC } from "hono/jsx";
 import { globalClass } from "./style";
 import { Style } from "hono/css";
 import { posts } from "./post";
+import { serveStatic } from "@hono/node-server/serve-static";
 
 const app = new Hono();
 const title = "tkancf.com";
@@ -33,6 +34,8 @@ const Layout: FC = (props) => {
     </html>
   );
 };
+
+app.use("*", serveStatic({ root: "public" }));
 
 app.all(
   "*",

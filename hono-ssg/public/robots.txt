@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tkancf.com/sitemap-index.xml
