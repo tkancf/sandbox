@@ -84,7 +84,6 @@ app.get("/", (c) => {
 });
 
 app.get("/blog", async (c) => {
-  // return all posts
   return c.render(
     <div class={postListClass}>
       <h2>記事一覧</h2>
