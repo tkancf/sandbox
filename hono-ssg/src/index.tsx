@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { onlySSG, ssgParams } from "hono/ssg";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { FC } from "hono/jsx";
-import { globalClass } from "./style";
+import { globalCSS } from "./style";
 import { css, Style } from "hono/css";
 import { getPosts } from "./post";
 import { serveStatic } from "@hono/node-server/serve-static";
@@ -13,26 +13,31 @@ const posts = await getPosts();
 
 const Layout: FC = (props) => {
   return (
-    <html class={globalClass}>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <Style />
-      </head>
-      <body>
-        <header>
-          <h1>{title}</h1>
-          <nav>
-            <a href="/">Home</a>
-            <a href="/blog">Blog</a>
-            <a href="https://github.com/tkancf">GitHub</a>
-            <a href="/about">About</a>
-          </nav>
-        </header>
-        <main>{props.children}</main>
-        <footer>
-          <p>© 2024 tkancf.com</p>
-        </footer>
-      </body>
+    <html class={globalCSS}>
+      <div>
+        <head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <Style />
+        </head>
+        <body>
+          <header>
+            <h1>{title}</h1>
+            <nav>
+              <a href="/">Home</a>
+              <a href="/blog">Blog</a>
+              <a href="https://github.com/tkancf">GitHub</a>
+              <a href="/about">About</a>
+            </nav>
+          </header>
+          <main>{props.children}</main>
+          <footer>
+            <p>© 2024 tkancf.com</p>
+          </footer>
+        </body>
+      </div>
     </html>
   );
 };
@@ -46,7 +51,7 @@ app.all(
   })
 );
 
-const postListClass = css`
+const postListCSS = css`
   ul {
     list-style-type: none;
     padding: unset;
@@ -67,7 +72,7 @@ const postListClass = css`
 
 app.get("/", (c) => {
   return c.render(
-    <div class={postListClass}>
+    <div class={postListCSS}>
       <h2>最新の記事</h2>
       <ul>
         {posts
@@ -85,7 +90,7 @@ app.get("/", (c) => {
 
 app.get("/blog", async (c) => {
   return c.render(
-    <div class={postListClass}>
+    <div class={postListCSS}>
       <h2>記事一覧</h2>
       <ul>
         {posts.map((post) => (
