@@ -24,7 +24,8 @@ const Layout: FC = (props) => {
           <nav>
             <a href="/">Home</a>
             <a href="/blog">Blog</a>
-            <a href="/about">About</a>
+            <a href="https://github.com/tkancf">GitHub</a>
+            <a href="/about">About me</a>
           </nav>
         </header>
         <main>{props.children}</main>
@@ -48,11 +49,17 @@ app.all(
 app.get("/", (c) => {
   return c.render(
     <>
-      <h1>Home🔥</h1>
-      <p>
-        Welcome to my blog! This is a sample blog built with Hono. You can find
-        the source code for this blog{" "}
-      </p>
+      <h2>最新の記事</h2>
+      <ul>
+        {posts
+          .map((post) => (
+            <li>
+              <time>{post.pubDate}</time>
+              <a href={`/blog/${post.slug}`}>{post.title}</a>
+            </li>
+          ))
+          .slice(0, 5)}
+      </ul>
     </>
   );
 });
