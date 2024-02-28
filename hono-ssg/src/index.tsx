@@ -3,7 +3,7 @@ import { onlySSG, ssgParams } from "hono/ssg";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { FC } from "hono/jsx";
 import { globalClass } from "./style";
-import { Style } from "hono/css";
+import { css, Style } from "hono/css";
 import { getPosts } from "./post";
 import { serveStatic } from "@hono/node-server/serve-static";
 
@@ -13,10 +13,10 @@ const posts = await getPosts();
 
 const Layout: FC = (props) => {
   return (
-    <html>
+    <html class={globalClass}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <Style>{globalClass}</Style>
+        <Style />
       </head>
       <body>
         <header>
@@ -46,9 +46,28 @@ app.all(
   })
 );
 
+const postListClass = css`
+  ul {
+    list-style-type: none;
+    padding: unset;
+  }
+  ul li {
+    display: flex;
+    margin-bottom: 8px;
+  }
+  time {
+    flex: 0 0 130px;
+    font-style: italic;
+    color: #595959;
+  }
+  ul li a:visited {
+    color: #8e32dc;
+  }
+`;
+
 app.get("/", (c) => {
   return c.render(
-    <>
+    <div class={postListClass}>
       <h2>最新の記事</h2>
       <ul>
         {posts
@@ -60,15 +79,15 @@ app.get("/", (c) => {
           ))
           .slice(0, 5)}
       </ul>
-    </>
+    </div>
   );
 });
 
 app.get("/blog", async (c) => {
   // return all posts
   return c.render(
-    <>
-      <h1>Blog</h1>
+    <div class={postListClass}>
+      <h2>記事一覧</h2>
       <ul>
         {posts.map((post) => (
           <li>
@@ -77,7 +96,7 @@ app.get("/blog", async (c) => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 });
 
