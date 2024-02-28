@@ -33,8 +33,15 @@ const Layout: FC = (props) => {
             </nav>
           </header>
           <main>{props.children}</main>
-          <footer>
-            <p>© 2024 tkancf.com</p>
+          <footer
+            class={css`
+              div {
+                display: flex;
+                justify-content: center;
+              }
+            `}
+          >
+            <div>© 2024 tkancf.com</div>
           </footer>
         </body>
       </div>
