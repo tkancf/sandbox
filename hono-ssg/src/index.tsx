@@ -25,7 +25,7 @@ const Layout: FC = (props) => {
             <a href="/">Home</a>
             <a href="/blog">Blog</a>
             <a href="https://github.com/tkancf">GitHub</a>
-            <a href="/about">About me</a>
+            <a href="/about">About</a>
           </nav>
         </header>
         <main>{props.children}</main>
