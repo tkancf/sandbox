@@ -45,6 +45,8 @@ const postListCSS = css`
 `;
 
 app.get("/", (c) => {
+  metadata.description =
+    "tkancfのブログです。主にIT技術関連のメモなどを書いています。";
   return c.render(
     <Layout metadata={metadata}>
       <div class={postListCSS}>
