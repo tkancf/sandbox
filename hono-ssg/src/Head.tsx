@@ -12,13 +12,13 @@ export const Head: FC = (props) => {
       <meta name="viewport" content="width=device-width,initial-scale=1" />
       <meta name="title" content={props.metadata.title} />
       <meta name="description" content={props.metadata.description} />
-      /* Open Graph / Facebook */
+      {/* Open Graph / Facebook */}
       <meta property="og:type" content="website" />
       <meta property="og:url" content={props.metadata.url} />
       <meta property="og:title" content={props.metadata.title} />
       <meta property="og:description" content={props.metadata.description} />
       <meta property="og:image" content={props.metadata.ogImage} />
-      /* Twitter Card */
+      {/* Twitter Card */}
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content={props.metadata.url} />
       <meta property="twitter:title" content={props.metadata.title} />
