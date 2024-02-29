@@ -16,6 +16,7 @@ type Post = {
   pubDate: string;
   description: string;
   body: string;
+  heroImage?: string;
 };
 
 const postsDir = "content/blog";
@@ -46,9 +47,10 @@ export const getPosts = async () => {
 
       const post: Post = {
         slug: path.parse(path.basename(filePath)).name,
-        title: (result.data.frontMatter as any).title,
-        pubDate: (result.data.frontMatter as any).pubDate,
-        description: (result.data.frontMatter as any).description,
+        title: (result.data.frontMatter as Post).title,
+        pubDate: (result.data.frontMatter as Post)?.pubDate,
+        description: (result.data.frontMatter as Post)?.description,
+        heroImage: (result.data.frontMatter as Post)?.heroImage,
         body: result.toString(),
       };
       return post;

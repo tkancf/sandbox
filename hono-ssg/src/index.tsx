@@ -13,10 +13,10 @@ type Metadata = {
   title: string;
   url: string;
   description: string;
-  ogImage: string;
+  ogImage?: string;
 };
 
-const metadata: Metadata = {
+let metadata: Metadata = {
   title: "tkancf.com",
   url: "https://tkancf.com",
   description: "",
@@ -45,8 +45,13 @@ const postListCSS = css`
 `;
 
 app.get("/", (c) => {
-  metadata.description =
-    "tkancfのブログです。主にIT技術関連のメモなどを書いています。";
+  metadata = {
+    description:
+      "tkancfのホームページです。主にIT技術関連のメモなどを書いています。",
+    ogImage: "/icon.jpg",
+    title: "tkancf.com",
+    url: "https://tkancf.com",
+  };
   return c.render(
     <Layout metadata={metadata}>
       <div class={postListCSS}>
@@ -67,8 +72,12 @@ app.get("/", (c) => {
 });
 
 app.get("/blog", async (c) => {
-  metadata.description =
-    "tkancfのブログの記事一覧ページです。主にIT技術関連のメモなどを書いています。";
+  metadata = {
+    description: "tkancfのブログの記事一覧ページです。",
+    ogImage: "/icon.jpg",
+    title: "tkancf.com - ブログ記事一覧",
+    url: "https://tkancf.com/blog",
+  };
   return c.render(
     <Layout metadata={metadata}>
       <div class={postListCSS}>
@@ -101,6 +110,12 @@ app.get(
     if (!post) {
       return c.redirect("/404");
     }
+    metadata = {
+      description: post.description,
+      ogImage: post.heroImage,
+      title: "tkancf.com - ブログ記事一覧",
+      url: "https://tkancf.com/blog",
+    };
     return c.render(
       <Layout metadata={metadata}>
         <h1>{post.title}</h1>
