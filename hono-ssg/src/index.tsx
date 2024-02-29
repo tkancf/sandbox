@@ -11,15 +11,15 @@ const posts = await getPosts();
 
 type Metadata = {
   title: string;
-  pubDate: string;
+  url: string;
   description: string;
   ogImage: string;
 };
 
 const metadata: Metadata = {
   title: "tkancf.com",
-  pubDate: "2024-01-01",
-  description: "tkancf.com",
+  url: "https://tkancf.com",
+  description: "",
   ogImage: "/icon.jpg",
 };
 
@@ -67,6 +67,8 @@ app.get("/", (c) => {
 });
 
 app.get("/blog", async (c) => {
+  metadata.description =
+    "tkancfのブログの記事一覧ページです。主にIT技術関連のメモなどを書いています。";
   return c.render(
     <Layout metadata={metadata}>
       <div class={postListCSS}>
