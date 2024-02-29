@@ -121,7 +121,6 @@ app.get(
       <Layout metadata={metadata}>
         <h1>{post.title}</h1>
         <div>投稿日: {post.pubDate}</div>
-        <div>{post.description}</div>
         <hr />
         <div dangerouslySetInnerHTML={{ __html: post.body }}></div>
       </Layout>
@@ -142,9 +141,6 @@ app.get("/about", (c) => {
     </Layout>
   );
 });
-
-// SSGでビルドしたときだけアクセスできるエンドポイント
-app.get("/status", onlySSG(), (c) => c.json({ ok: true }));
 
 app.get("/404", (c) => c.notFound());
 
