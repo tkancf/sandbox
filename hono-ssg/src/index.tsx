@@ -9,41 +9,47 @@ import { serveStatic } from "@hono/node-server/serve-static";
 const app = new Hono();
 const title = "tkancf.com";
 const posts = await getPosts();
+type Metadata = {
+  title: string;
+  pubDate: string;
+  description: string;
+};
+const metadata: Metadata = {
+  title: "tkancf.com",
+  pubDate: "2024-01-01",
+  description: "tkancf.com",
+};
 
 const Layout: FC = (props) => {
   return (
     <html class={globalCSS}>
-      <div>
-        <head>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          />
-          <Style />
-        </head>
-        <body>
-          <header>
-            <h1>{title}</h1>
-            <nav>
-              <a href="/">Home</a>
-              <a href="/blog">Blog</a>
-              <a href="https://github.com/tkancf">GitHub</a>
-              <a href="/about">About</a>
-            </nav>
-          </header>
-          <main>{props.children}</main>
-          <footer
-            class={css`
-              div {
-                display: flex;
-                justify-content: center;
-              }
-            `}
-          >
-            <div>© 2024 tkancf.com</div>
-          </footer>
-        </body>
-      </div>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{props.metadata.title}</title>
+        <Style />
+      </head>
+      <body>
+        <header>
+          <h1>{title}</h1>
+          <nav>
+            <a href="/">Home</a>
+            <a href="/blog">Blog</a>
+            <a href="https://github.com/tkancf">GitHub</a>
+            <a href="/about">About</a>
+          </nav>
+        </header>
+        <main>{props.children}</main>
+        <footer
+          class={css`
+            div {
+              display: flex;
+              justify-content: center;
+            }
+          `}
+        >
+          <div>© 2024 tkancf.com</div>
+        </footer>
+      </body>
     </html>
   );
 };
@@ -71,7 +77,7 @@ const postListCSS = css`
 
 app.get("/", (c) => {
   return c.render(
-    <Layout title="tkancf.com">
+    <Layout metadata={metadata}>
       <div class={postListCSS}>
         <h2>最新の記事</h2>
         <ul>
@@ -91,7 +97,7 @@ app.get("/", (c) => {
 
 app.get("/blog", async (c) => {
   return c.render(
-    <Layout title="tkancf.com">
+    <Layout metadata={metadata}>
       <div class={postListCSS}>
         <h2>記事一覧</h2>
         <ul>
@@ -123,7 +129,7 @@ app.get(
       return c.redirect("/404");
     }
     return c.render(
-      <Layout title="tkancf.com">
+      <Layout metadata={metadata}>
         <h1>{post.title}</h1>
         <div>slug: {slug}</div>
         <div>投稿日: {post.pubDate}</div>
@@ -137,7 +143,7 @@ app.get(
 
 app.get("/about", (c) => {
   return c.render(
-    <Layout title="tkancf.com">
+    <Layout metadata={metadata}>
       <p>
         tkancfというユーザ名で登録していることが多いです。
         <br />
