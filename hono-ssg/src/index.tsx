@@ -1,6 +1,5 @@
 import { Hono } from "hono";
 import { onlySSG, ssgParams } from "hono/ssg";
-import { jsxRenderer } from "hono/jsx-renderer";
 import { FC } from "hono/jsx";
 import { globalCSS } from "./style";
 import { css, Style } from "hono/css";
@@ -51,13 +50,6 @@ const Layout: FC = (props) => {
 
 app.use("*", serveStatic({ root: "public" }));
 
-app.all(
-  "*",
-  jsxRenderer(({ children }) => {
-    return <Layout>{children}</Layout>;
-  })
-);
-
 const postListCSS = css`
   ul {
     list-style-type: none;
@@ -79,35 +71,39 @@ const postListCSS = css`
 
 app.get("/", (c) => {
   return c.render(
-    <div class={postListCSS}>
-      <h2>最新の記事</h2>
-      <ul>
-        {posts
-          .map((post) => (
-            <li>
-              <time>{post.pubDate}</time>
-              <a href={`/blog/${post.slug}`}>{post.title}</a>
-            </li>
-          ))
-          .slice(0, 5)}
-      </ul>
-    </div>
+    <Layout title="tkancf.com">
+      <div class={postListCSS}>
+        <h2>最新の記事</h2>
+        <ul>
+          {posts
+            .map((post) => (
+              <li>
+                <time>{post.pubDate}</time>
+                <a href={`/blog/${post.slug}`}>{post.title}</a>
+              </li>
+            ))
+            .slice(0, 5)}
+        </ul>
+      </div>
+    </Layout>
   );
 });
 
 app.get("/blog", async (c) => {
   return c.render(
-    <div class={postListCSS}>
-      <h2>記事一覧</h2>
-      <ul>
-        {posts.map((post) => (
-          <li>
-            <time>{post.pubDate}</time>
-            <a href={`/blog/${post.slug}`}>{post.title}</a>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Layout title="tkancf.com">
+      <div class={postListCSS}>
+        <h2>記事一覧</h2>
+        <ul>
+          {posts.map((post) => (
+            <li>
+              <time>{post.pubDate}</time>
+              <a href={`/blog/${post.slug}`}>{post.title}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Layout>
   );
 });
 
@@ -127,21 +123,21 @@ app.get(
       return c.redirect("/404");
     }
     return c.render(
-      <>
+      <Layout title="tkancf.com">
         <h1>{post.title}</h1>
         <div>slug: {slug}</div>
         <div>投稿日: {post.pubDate}</div>
         <div>{post.description}</div>
         <hr></hr>
         <div dangerouslySetInnerHTML={{ __html: post.body }}></div>
-      </>
+      </Layout>
     );
   }
 );
 
 app.get("/about", (c) => {
   return c.render(
-    <>
+    <Layout title="tkancf.com">
       <p>
         tkancfというユーザ名で登録していることが多いです。
         <br />
@@ -199,7 +195,7 @@ app.get("/about", (c) => {
           <li>上記エンジニアチームのプレイングマネージャー</li>
         </ul>
       </ul>
-    </>
+    </Layout>
   );
 });
 
