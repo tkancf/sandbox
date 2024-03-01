@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { onlySSG, ssgParams } from "hono/ssg";
+import { ssgParams } from "hono/ssg";
 import { css } from "hono/css";
 import { getPosts } from "./post";
 import { serveStatic } from "@hono/node-server/serve-static";
