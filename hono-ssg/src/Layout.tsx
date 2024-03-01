@@ -4,11 +4,10 @@ import { css } from "hono/css";
 import { Head } from "./Head";
 
 export const Layout: FC = (props) => {
-  const path = new URL(props.metadata.url).pathname;
   return (
     <html class={globalCSS}>
       <Head metadata={props.metadata} />
-      <Header path={path} />
+      <Header {...props} />
       <main>{props.children}</main>
       <Footer />
     </html>
@@ -38,17 +37,18 @@ export const Header: FC = (props) => {
       text-decoration: underline;
     }
   `;
+  const path = new URL(props.metadata.url).pathname;
   return (
     <header class={headerCSS}>
       <h2>tkancf.com</h2>
       <nav>
-        <a className={props.path === "/" ? "active" : ""} href="/">
+        <a className={path === "/" ? "active" : ""} href="/">
           Home
         </a>
-        <a className={props.path === "/blog" ? "active" : ""} href="/blog">
+        <a className={path === "/blog" ? "active" : ""} href="/blog">
           Blog
         </a>
-        <a className={props.path === "/about" ? "active" : ""} href="/about">
+        <a className={path === "/about" ? "active" : ""} href="/about">
           About
         </a>
         <a href="https://github.com/tkancf">GitHub</a>
