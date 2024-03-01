@@ -55,6 +55,12 @@ app.get("/", (c) => {
   return c.render(
     <Layout metadata={metadata}>
       <div class={postListCSS}>
+        <h2>tkancf.comへようこそ</h2>
+        <p>
+          tkancfのブログです。主にIT技術関連のメモなどを書いています。
+          <br />
+          全記事一覧は <a href="/blog">こちら</a> です。
+        </p>
         <h2>最新の記事</h2>
         <ul>
           {posts
