@@ -47,8 +47,7 @@ const postListCSS = css`
 
 app.get("/", (c) => {
   metadata = {
-    description:
-      "tkancfのホームページです。主にIT技術関連のメモなどを書いています。",
+    description: "tkancfのブログです。主にIT技術関連のメモなどを書いています。",
     ogImage: "/icon.jpg",
     title: "tkancf.com",
     url: "https://tkancf.com",
