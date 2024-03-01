@@ -1,5 +1,5 @@
 import { FC } from "hono/jsx";
-import { globalCSS } from "./style";
+import { globalCSS } from "../lib/style";
 import { Head } from "./Head";
 import { Header } from "./Header";
 import { Footer } from "./Footer";

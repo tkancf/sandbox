@@ -1,10 +1,10 @@
 import { Hono } from "hono";
 import { ssgParams } from "hono/ssg";
 import { css } from "hono/css";
-import { getPosts } from "./post";
+import { getPosts } from "./lib/post";
 import { serveStatic } from "@hono/node-server/serve-static";
-import { Layout } from "./Layout";
-import { About } from "./About";
+import { Layout } from "./components/Layout";
+import { About } from "./components/About";
 
 const app = new Hono();
 
