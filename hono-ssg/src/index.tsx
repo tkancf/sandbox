@@ -5,6 +5,8 @@ import { getPosts } from "./lib/post";
 import { serveStatic } from "@hono/node-server/serve-static";
 import { Layout } from "./components/Layout";
 import { About } from "./components/About";
+import { baseURL, siteName } from "./lib/constants";
+import RSS from "rss";
 
 const app = new Hono();
 
@@ -18,8 +20,8 @@ type Metadata = {
 };
 
 let metadata: Metadata = {
-  title: "tkancf.com",
-  url: "https://tkancf.com",
+  title: siteName,
+  url: baseURL,
   description: "",
   ogImage: "/icon.jpg",
 };
@@ -49,13 +51,13 @@ app.get("/", (c) => {
   metadata = {
     description: "tkancfのブログです。主にIT技術関連のメモなどを書いています。",
     ogImage: "/icon.jpg",
-    title: "tkancf.com",
-    url: "https://tkancf.com",
+    title: siteName,
+    url: baseURL,
   };
   return c.render(
     <Layout metadata={metadata}>
       <div class={postListCSS}>
-        <h2>tkancf.comへようこそ</h2>
+        <h2>{siteName}へようこそ</h2>
         <p>
           tkancfのブログです。主にIT技術関連のメモなどを書いています。
           <br />
@@ -81,8 +83,8 @@ app.get("/blog", async (c) => {
   metadata = {
     description: "tkancfのブログの記事一覧ページです。",
     ogImage: "/icon.jpg",
-    title: "tkancf.com - ブログ記事一覧",
-    url: "https://tkancf.com/blog",
+    title: siteName + " - ブログ記事一覧",
+    url: baseURL + "blog",
   };
   return c.render(
     <Layout metadata={metadata}>
@@ -119,8 +121,8 @@ app.get(
     metadata = {
       description: post.description,
       ogImage: post.heroImage,
-      title: "tkancf.com - ブログ記事一覧",
-      url: "https://tkancf.com/blog/" + post.slug,
+      title: siteName + " - ブログ記事一覧",
+      url: baseURL + "/blog/" + post.slug,
     };
     return c.render(
       <Layout metadata={metadata}>
@@ -137,14 +139,42 @@ app.get("/about", (c) => {
   metadata = {
     description: "tkancfのブログのAboutページです。About meを含みます。",
     ogImage: "/icon.jpg",
-    title: "tkancf.com - About",
-    url: "https://tkancf.com/about",
+    title: siteName + " - About",
+    url: baseURL + "/about",
   };
   return c.render(
     <Layout metadata={metadata}>
       <About />
     </Layout>
   );
+});
+
+const generateFeed = async () => {
+  const rss = new RSS({
+    title: siteName,
+    site_url: baseURL,
+    description: siteName,
+    feed_url: baseURL + "/feed",
+    generator: siteName,
+  });
+  posts.forEach(async (post: any) => {
+    const url = baseURL + "/blog/" + post.slug;
+    rss.item({
+      title: post.title,
+      url: url,
+      date: new Date(post.pubDate),
+      description: post.description,
+    });
+  });
+
+  return rss.xml();
+};
+
+app.get("/feed", async (c) => {
+  const feeds = await generateFeed();
+  return c.text(feeds, 200, {
+    "Content-Type": "text/xml",
+  });
 });
 
 app.get("/404", (c) => c.notFound());

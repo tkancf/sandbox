@@ -1,5 +1,6 @@
 import { FC } from "hono/jsx";
 import { css } from "hono/css";
+import { siteName } from "../lib/constants";
 
 export const Header: FC = (props) => {
   const headerCSS = css`
@@ -27,7 +28,7 @@ export const Header: FC = (props) => {
   const path = new URL(props.metadata.url).pathname;
   return (
     <header class={headerCSS}>
-      <h2>tkancf.com</h2>
+      <h2>{siteName}</h2>
       <nav>
         <a className={path === "/" ? "active" : ""} href="/">
           Home

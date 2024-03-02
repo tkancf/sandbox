@@ -14,8 +14,7 @@ export const About = () => {
         loading="lazy"
       />
       <h2>アカウント・リンク集</h2>
-      ブログ等の記事は外部サイト含めて、記事一覧ページ(
-      <a href="https://tkancf.com/blog">tkancf.com/blog</a>)
+      ブログ等の記事は外部サイト含めて、<a href="/blog">記事一覧ページ</a>
       にあるので、まとめて見たい場合はそちらを参照してください。
       <ul>
         <li>

@@ -1,5 +1,6 @@
 import { FC } from "hono/jsx";
 import { css } from "hono/css";
+import { siteName } from "../lib/constants";
 
 export const Footer: FC = () => {
   return (
@@ -13,7 +14,7 @@ export const Footer: FC = () => {
         }
       `}
     >
-      <div>© 2024 tkancf.com</div>
+      <div>© 2024 {siteName}</div>
     </footer>
   );
 };
