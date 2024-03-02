@@ -84,7 +84,7 @@ app.get("/blog", async (c) => {
     description: "tkancfのブログの記事一覧ページです。",
     ogImage: "/icon.jpg",
     title: siteName + " - ブログ記事一覧",
-    url: baseURL + "blog",
+    url: baseURL + "/blog",
   };
   return c.render(
     <Layout metadata={metadata}>
