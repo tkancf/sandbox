@@ -135,25 +135,6 @@ app.get(
   }
 );
 
-app.get(
-  "/blog/:slug/",
-  ssgParams(async () => {
-    return posts.map((post) => {
-      return {
-        slug: post.slug,
-      };
-    });
-  }),
-  async (c) => {
-    const slug = c.req.param("slug");
-    const post = posts.find((p) => p.slug === slug);
-    if (!post) {
-      return c.redirect("/404");
-    }
-    return c.redirect(`/blog/${post.slug}`);
-  }
-);
-
 app.get("/about", (c) => {
   metadata = {
     description: "tkancfのブログのAboutページです。About meを含みます。",
